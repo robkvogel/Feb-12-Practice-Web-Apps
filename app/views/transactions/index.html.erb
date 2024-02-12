@@ -3,6 +3,33 @@
 <!-- Step 1: List all transactions, starting with the ICO -->
 
 <% transactions = Transaction.all%>
+<% users = User.all%>
+
+<p> we have <%= transactions.count %> transactions 
+</p>
+
+<p> we have <%= users.count %> users 
+</p>
+
+<!-- Recipe
+1. loop through all transactions, probably they should be ordered
+2. In each loop, print out 
+-->
+
+<ol>
+<%for transaction in transactions %>
+<li>
+  <% if transaction["from_user_id"] %>
+    The amount is <%=transaction["amount"] %> total
+  <% end %>
+
+</li>
+<%end%>
+</ol>
+
+
+
+
 
 
 
