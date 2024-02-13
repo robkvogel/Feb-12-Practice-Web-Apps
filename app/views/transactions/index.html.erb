@@ -5,10 +5,8 @@
 <% transactions = Transaction.all%>
 <% users = User.all%>
 
-<p> we have <%= transactions.count %> transactions 
-</p>
-<p> we have <%= users.count %> users 
-</p>
+<p> we have <%= transactions.count %> transactions </p>
+<p> we have <%= users.count %> users </p>
 
 <!-- Recipe
 1. loop through all transactions, probably they should be ordered
@@ -30,10 +28,18 @@
 <%end%>
 </ol>
 
-
 <!-- Step 2: Calculate and display the balances -->
-
-
+<h1>User Balances</h1>
+<small>Assumes each user started with 0 KC</small>
+<ul>
+<%for user in users%>
+<% total_received = Transaction.where({"to_user_id" => user["id"]}).sum("amount")%> 
+<% total_sent = Transaction.where({"from_user_id" => user["id"]}).sum("amount")%> 
+<% balance = total_received - total_sent %>
+<li>   <%=user["name"] %>'s balance is <%=balance%> KC
+</li>
+<%end%>
+</ul>
 
 <!-- 
 Expected balances:
