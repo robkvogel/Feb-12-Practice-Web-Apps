@@ -18,21 +18,22 @@
 <ol>
 <%for transaction in transactions %>
 <% sender = User.find_by({"id" => transaction["from_user_id"]}) %>
+<% receiver = User.find_by({"id" => transaction["to_user_id"]}) %>
 <li>
   <% if transaction["from_user_id"] %>
-   $<%=transaction["amount"] %> sent from <%=transaction["from_user_id"]%> to <%=transaction["to_user_id"]%>
-   sender is <%= sender["name"] %>
+   <!-- $<%=transaction["amount"] %> sent from <%=transaction["from_user_id"]%> to <%=transaction["to_user_id"]%> -->
+    $<%=transaction["amount"] %> sent from <%=sender["name"]%> to <%= receiver["name"]%>
    <% else %>
-   Initial Coin Offering: $<%=transaction["amount"] %> to <%=transaction["to_user_id"]%>
+   Initial Coin Offering: $<%=transaction["amount"] %> to <%= receiver["name"]%>
   <% end %>
 </li>
 <%end%>
 </ol>
 
 
-
-
 <!-- Step 2: Calculate and display the balances -->
+
+
 
 <!-- 
 Expected balances:
